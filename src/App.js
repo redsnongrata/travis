@@ -1,81 +1,37 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-
-import { useState } from 'react';
-import Alert from 'react-bootstrap/Alert';
-import Button from 'react-bootstrap/Button';
+// App.js
+import React from 'react';
+import Product from './product';
+import Name from './Name';
+import Price from './Price';
+import Description from './Description';
+import Image from './Image';
 import Card from 'react-bootstrap/Card';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function BodyOnlyExample() {
+const firstName = "YourFirstName"; // Replace with your first name
+
+const App = () => {
+  const productData = require('./product');
+
   return (
-    <Card>
-      <Card.Body>This is some text within a card body.</Card.Body>
-    </Card>
+    <div className="app-container">
+      <Card style={{ width: '18rem', margin: 'auto', marginTop: '50px' }}>
+        <Card.Body>
+          <Image image={productData.image} />
+          <Card.Title>
+            <Name name={productData.name} />
+          </Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">
+            <Price price={productData.price} />
+          </Card.Subtitle>
+          <Card.Text>
+            <Description description={productData.description} />
+          </Card.Text>
+        </Card.Body>
+      </Card>
+      <p className="greeting">{firstName ? `Hello, ${firstName}!` : 'Hello, there!'}</p>
+    </div>
   );
-}
+};
 
-
-function AlertDismissible() {
-    const [show, setShow] = useState(true);
-
-    return (
-        <>
-            <Alert show={show} variant="success">
-                <Alert.Heading>My Alert</Alert.Heading>
-                <p>
-                    Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
-                    lacinia odio sem nec elit. Cras mattis consectetur purus sit amet
-                    fermentum.
-                </p>
-                <hr />
-                <div className="d-flex justify-content-end">
-                    <Button onClick={() => setShow(false)} variant="outline-success">
-                        Close me
-                    </Button>
-                </div>
-            </Alert>
-
-            {!show && <Button onClick={() => setShow(true)}>Show Alert</Button>}
-        </>
-    );
-}
-
-
-
-
-
-
-
-function MyNavbar() {
-    return (
-        <>
-            <Navbar className="bg-body-tertiary">
-                <Container>
-                    <Navbar.Brand href="#home">Brand link</Navbar.Brand>
-                </Container>
-            </Navbar>
-        </>
-    );
-}
-
-
-
-function App() {
-
-    return (
-        <>
-
-            <div className='App'>
-                <MyNavbar />
-                <AlertDismissible />
-                <BodyOnlyExample/>
-                <BodyOnlyExample/>
-                <BodyOnlyExample/>
-            </div>
-        </>
-    )
-
-}
-
-export default App
+export default App;
